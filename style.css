@@ -1,0 +1,226 @@
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    transition: 0.1s ease-in-out;
+
+}
+
+/* /navbar */
+
+.navbar{
+    background-color: rgb(60, 56, 56);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 5.5rem;
+}
+
+.prioty{
+    background-color: rgba(242, 234, 234, 0.196);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.color {
+    
+    width: 3.5rem;
+    height: 2rem;
+    margin: .8rem .5rem;
+    border: solid 2px white;
+}
+.pink{
+    background:pink;
+    
+}
+
+.green{
+    background: rgb(77, 224, 96);
+
+}
+
+.blue{
+    background: rgb(0, 238, 255);
+}
+.black{
+    background-color: black;
+}
+
+.color:hover{
+    border: 5px solid  rgba(242, 234, 234, 0.933);
+    
+}
+
+/* buttons */
+
+ .button{
+    display: flex;
+    align-items: center;
+
+}
+
+.btn{
+    color: white;
+    font-size: 2rem;
+    font-weight:900;
+    position: relative;
+    padding: .6rem 2rem;
+    overflow: hidden;
+}
+.add{
+    background-color: rgba(242, 234, 234, 0.196);
+
+}
+.remove{
+    background-color: rgba(242, 234, 234, 0.196);
+}
+
+.button .btn::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: -100%;
+    border-radius: 50%;
+    transition: all ease-in-out .3s;
+}
+
+.btn:hover::after{
+    background-color: rgba(0, 0, 0, 0.512);
+    bottom: 0;
+    border-radius: 0;
+}
+
+.btn i{
+    position: relative;
+    z-index: 9;
+
+}
+
+/* --notepad section */
+.note_container{
+   
+    display: none;
+    place-items: center;
+    height: 80vh;
+}
+
+.textbox{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.text {
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgb(85, 85, 85);
+    background-color: rgb(232, 231, 230);
+    resize: none;
+    font-size: 1.2rem;
+    padding: 3px 6px;
+  }
+
+.text::placeholder{
+    text-align: center;
+    padding-top: 5rem;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.pref {
+    padding: .3rem .6rem;
+    margin: .5rem;
+    width: 5rem;
+    height: 3rem;
+    border: solid 3px white;
+}
+.prefs{
+    background: #5e5c5c;
+    display: grid;
+    place-items: center;
+    width: 6rem;
+}
+/* .prefs .pink{
+    background:pink;
+    
+}
+.prefs .green{
+    background: rgb(124, 221, 136);
+}
+.prefs .blue{
+    background: rgb(0, 238, 255);
+}
+.prefs .black{
+    background-color: black;
+} */
+
+.pref:hover{
+    border: solid 3px rgb(201, 197, 197);
+}
+
+/* -note */
+
+.note{
+    width: 98vw;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.notes {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #080808;
+    width: 15rem;
+    margin: 2rem;
+    text-align: center;
+    position: relative;
+
+}
+.priotyclr{
+    height: .7rem;
+}
+.note_id{
+    height: 1rem;
+    background-color: rgb(0, 255, 229);
+}
+.write_notes{
+    height: 12rem;
+    text-align: left;
+    padding: 4px;
+    background-color:#FFF6CD;
+    
+}
+
+#lock{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+}
+
+/* global variable */
+.hidenote{
+    display: none !important;
+}
+
+.active{
+    border: solid 3px rgb(210, 204, 15);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
