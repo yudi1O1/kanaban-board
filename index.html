@@ -3,72 +3,223 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>kanaban board</title>
+    <title>Momentum Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/a16f782519.js"
-      crossorigin="anonymous"
-    ></script>
   </head>
   <body>
-    <!-- -> navbar -->
-    <section class="header">
-      <div class="navbar">
-        <div class="prioty">
-          <a href="#" class="color pink"></a>
-          <a href="#" class="color green"></a>
-          <a href="#" class="color blue"></a>
-          <a href="#" class="color black"></a>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Focus workspace</p>
+          <h1>Plan clearly. Ship faster. Keep momentum visible.</h1>
+          <p class="hero-text">
+            A refactored productivity board with search, priority filters,
+            due-date awareness, drag-and-drop flow, and local autosave.
+          </p>
         </div>
-        <!-- buttons -->
-        <div class="button">
-          <div class="btn add">
-            <i class="fa-solid fa-plus" id="icon"></i>
+
+        <div class="hero-panel">
+          <div class="hero-stat">
+            <span class="stat-label">Tasks</span>
+            <strong id="totalTasks">0</strong>
           </div>
-          <div class="btn remove">
-            <i class="fa-solid fa-xmark" id="icon"></i>
+          <div class="hero-stat">
+            <span class="stat-label">Done today</span>
+            <strong id="completedTasks">0</strong>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-label">Urgent</span>
+            <strong id="urgentTasks">0</strong>
           </div>
         </div>
+      </header>
+
+      <section class="toolbar">
+        <div class="toolbar-main">
+          <label class="search-box" for="searchInput">
+            <span>Search</span>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Find task, tag, or detail"
+            />
+          </label>
+
+          <label class="filter-box" for="priorityFilter">
+            <span>Priority</span>
+            <select id="priorityFilter">
+              <option value="all">All priorities</option>
+              <option value="critical">Critical</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+
+          <label class="filter-box" for="sortBy">
+            <span>Sort</span>
+            <select id="sortBy">
+              <option value="manual">Manual order</option>
+              <option value="dueSoon">Due soon</option>
+              <option value="priority">Priority</option>
+              <option value="recent">Recently updated</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="toolbar-actions">
+          <button class="ghost-btn" id="clearFiltersBtn" type="button">
+            Reset filters
+          </button>
+          <button class="primary-btn" id="openComposerBtn" type="button">
+            New task
+          </button>
+        </div>
+      </section>
+
+      <section class="quick-strip" id="quickStats"></section>
+
+      <main class="board" id="board"></main>
+    </div>
+
+    <section class="composer-backdrop hidden" id="composerBackdrop">
+      <div class="composer-card" role="dialog" aria-modal="true">
+        <div class="composer-head">
+          <div>
+            <p class="eyebrow">Create task</p>
+            <h2>Capture the next meaningful piece of work</h2>
+          </div>
+          <button
+            class="icon-btn"
+            id="closeComposerBtn"
+            type="button"
+            aria-label="Close task composer"
+          >
+            x
+          </button>
+        </div>
+
+        <form id="taskForm" class="composer-form">
+          <label>
+            <span>Task title</span>
+            <input
+              id="taskTitle"
+              name="title"
+              type="text"
+              maxlength="80"
+              placeholder="Design mobile handoff checklist"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Description</span>
+            <textarea
+              id="taskDescription"
+              name="description"
+              rows="4"
+              maxlength="220"
+              placeholder="Add just enough context so future-you can act fast."
+            ></textarea>
+          </label>
+
+          <div class="composer-grid">
+            <label>
+              <span>Status</span>
+              <select id="taskStatus" name="status">
+                <option value="todo">To Do</option>
+                <option value="progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Priority</span>
+              <select id="taskPriority" name="priority">
+                <option value="critical">Critical</option>
+                <option value="high" selected>High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Due date</span>
+              <input id="taskDueDate" name="dueDate" type="date" />
+            </label>
+
+            <label>
+              <span>Tags</span>
+              <input
+                id="taskTags"
+                name="tags"
+                type="text"
+                placeholder="design, review, sprint"
+              />
+            </label>
+          </div>
+
+          <div class="composer-actions">
+            <button class="ghost-btn" id="cancelComposerBtn" type="button">
+              Cancel
+            </button>
+            <button class="primary-btn" type="submit">Save task</button>
+          </div>
+        </form>
       </div>
     </section>
 
-    <!-- --notepad section -->
-
-    <section class="note_container">
-      <div class="textbox">
-        <textarea
-          class="text"
-          placeholder="Enter note here press 'shift' to save"
-        ></textarea>
-        <div class="prefs">
-          <div class="pref pink"></div>
-          <div class="pref green"></div>
-          <div class="pref blue"></div>
-          <div class="pref black active"></div>
+    <template id="columnTemplate">
+      <section class="column" data-status="">
+        <div class="column-head">
+          <div>
+            <h3 class="column-title"></h3>
+            <p class="column-copy"></p>
+          </div>
+          <span class="column-count"></span>
         </div>
-      </div>
-    </section>
+        <div class="drop-zone"></div>
+      </section>
+    </template>
 
-    <!-- -note -->
+    <template id="taskTemplate">
+      <article class="task-card" draggable="true">
+        <div class="task-card-top">
+          <span class="priority-pill"></span>
+          <button class="task-delete" type="button" aria-label="Delete task">
+            Delete
+          </button>
+        </div>
 
-    <section class="note">
+        <div class="task-main">
+          <h4 class="task-title"></h4>
+          <p class="task-description"></p>
+        </div>
 
-      <!-- <div class="notes">
-        <div class="priotyclr"></div>
-        <div class="note_id">9831629788</div>
-        <div class="write_notes" contenteditable="false">${noteTexts}</div>
-        <i class="fa-solid fa-lock" id="lock"></i>
-      </div> -->
-      
+        <div class="task-meta">
+          <span class="due-chip"></span>
+          <span class="updated-chip"></span>
+        </div>
 
-    </section>
+        <div class="task-tags"></div>
 
-
-
-
+        <div class="task-actions">
+          <button class="ghost-btn small" data-action="advance" type="button">
+            Advance
+          </button>
+          <button class="ghost-btn small" data-action="edit" type="button">
+            Quick edit
+          </button>
+        </div>
+      </article>
+    </template>
 
     <script src="script.js"></script>
-    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
-
   </body>
 </html>
